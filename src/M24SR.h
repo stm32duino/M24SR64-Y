@@ -151,22 +151,32 @@ public:
 	/**
 	 * This function write a text in the NFC flag
 	 */
-  bool writeTxt(const char *text);
+	bool writeTxt(const char *text);
 
 	/**
 	 * This function read the text in the NFC flag and return it
 	 */
-  void readTxt(char text_read[]);
+	void readTxt(char text_read[]);
 
 	/**
 	 * This function write a URI in the NFC flag
 	 */
-  bool writeUri(const char *text);
+	bool writeUri(const char *text);
 
 	/**
 	 * This function read the URI in the NFC flag and return it
 	 */
-  void readUri(char text_read[]);
+	void readUri(char text_read[]);
+
+	/**
+	 * This function write a AAR in the NFC flag
+	 */
+	bool writeAAR(const char *text);
+
+	/**
+	 * This function read the AAR in the NFC flag and return it
+	 */
+	void readAAR(char text_read[]);
 
 	/**
 	 * Object that contains all the callbacks fired by this class, each command has its own callback.
