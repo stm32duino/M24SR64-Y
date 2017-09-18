@@ -115,7 +115,7 @@ public:
 	const std::string& get_language()const{
 		return mLanguage;
 	}
-	
+
 	/**
 	 * Get the encoding used to store the text.
 	 * @return get the encoding used to store the text

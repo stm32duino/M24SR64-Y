@@ -4,7 +4,7 @@
  * @author  ST / Central Labs
  * @version V2.0.0
  * @date    28 Apr 2017
- * @brief   Generic Record class 
+ * @brief   Generic Record class
  ******************************************************************************
  * @attention
  *
@@ -118,7 +118,7 @@ public:
 	/**
 	 * Get tag type.
 	 * @par This method should be overridden to return a valid type.
-	 * @return tag type 
+	 * @return tag type
 	 */
 	virtual RecordType_t get_type() const {
 		return TYPE_UNKNOWN;
@@ -127,7 +127,7 @@ public:
 
 	/**
 	 * Get the record header.
-	 * @return record header 
+	 * @return record header
 	 */
 	const RecordHeader& get_header() const{
 		return mRecordHeader;

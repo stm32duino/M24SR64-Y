@@ -81,7 +81,7 @@ public:
 	RecordMimeType(const std::string &mimeType, const std::string &data);
 
     /**
-     * Return the mime type of the content. 
+     * Return the mime type of the content.
      * @return the mime type of the content.
      */
 	const std::string& get_mime_type() const {
@@ -92,7 +92,7 @@ public:
 	 * Change the data pointer used by this record.
 	 * @param data Pointer used by this record.
 	 * @param dataLength Number of byte to write in this record.
-	 * @par The buffer is not copied or freed by this class. 
+	 * @par The buffer is not copied or freed by this class.
 	 * With this function only the data pointer is copied, so it must not be freed before the object is deallocated.
 	 */
 	void set_mime_data_pointer(uint8_t* data, uint32_t dataLength){

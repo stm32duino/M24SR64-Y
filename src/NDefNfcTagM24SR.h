@@ -35,8 +35,8 @@
   ******************************************************************************
   */
 
-#ifndef X_NUCLEO_NFC01A1_M24SR_NDEFNFCTAGM24SR_H_
-#define X_NUCLEO_NFC01A1_M24SR_NDEFNFCTAGM24SR_H_
+#ifndef M24SR_NDEFNFCTAGM24SR_H_
+#define M24SR_NDEFNFCTAGM24SR_H_
 
 #include <cstdlib>
 #include <stdint.h>
@@ -307,4 +307,4 @@ public:
 
 };
 
-#endif /* X_NUCLEO_NFC01A1_M24SR_NDEFNFCTAGM24SR_H_ */
+#endif /* M24SR_NDEFNFCTAGM24SR_H_ */

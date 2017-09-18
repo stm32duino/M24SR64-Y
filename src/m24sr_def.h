@@ -113,7 +113,7 @@ typedef enum {
  */
 #define SYSTEM_FILE_ID_BYTES {0xE1,0x01}
 #define CC_FILE_ID_BYTES {0xE1,0x03}
-#define NDEF_FILE_ID						0x0001	 
+#define NDEF_FILE_ID						0x0001
 /**
  * @}
  */
@@ -187,7 +187,7 @@ typedef enum {
 /*  Command structure Mask -------------------------------------------------------------------*/
 #define M24SR_PCB_NEEDED				0x0001		/* PCB byte present or not */
 #define M24SR_CLA_NEEDED				0x0002 		/* CLA byte present or not */
-#define M24SR_INS_NEEDED				0x0004 		/* Operation code present or not*/ 
+#define M24SR_INS_NEEDED				0x0004 		/* Operation code present or not*/
 #define M24SR_P1_NEEDED					0x0008		/* Selection Mode  present or not*/
 #define M24SR_P2_NEEDED					0x0010		/* Selection Option present or not*/
 #define M24SR_LC_NEEDED					0x0020		/* Data field length byte present or not */
@@ -227,13 +227,13 @@ typedef enum {
  * @param  val: number where MSB must be extracted
  * @retval MSB
  */
-#define GETMSB(val) 		( (uint8_t) ((val & 0xFF00 )>>8) ) 
+#define GETMSB(val) 		( (uint8_t) ((val & 0xFF00 )>>8) )
 
 /** @brief Get Least Significant Byte
  * @param  val: number where LSB must be extracted
  * @retval LSB
  */
-#define GETLSB(val) 		( (uint8_t) (val & 0x00FF )) 
+#define GETLSB(val) 		( (uint8_t) (val & 0x00FF ))
 
 /** @brief Used to toggle the block number by adding 0 or 1 to default block number value
  * @param  val: number to know if incrementation is needed
@@ -279,4 +279,4 @@ extern void M24SR_IO_RFDIS_WritePin(void *handle, uint8_t PinState);
 
 #endif /* __DRV_M24SR_H */
 
-/******************* (C) COPYRIGHT 2013 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

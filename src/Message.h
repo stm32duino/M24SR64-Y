@@ -61,13 +61,13 @@ public:
 
 	/**
 	 * Remove a ndef record to this message
-	 * @param r record to remove 
+	 * @param r record to remove
 	 */
 	void remove_record(Record *r){
 		mRecords.erase( std::remove( mRecords.begin(), mRecords.end(), r ),
-			 mRecords.end() ); 
+			 mRecords.end() );
 	}
-	
+
 
 	/**
 	 * Add all the records in the list to this message.
@@ -121,7 +121,7 @@ public:
 			const uint16_t bufferLength, Message *message);
 
 	/**
-	 * Remove all the recrods from the mesasge and delete it 
+	 * Remove all the recrods from the mesasge and delete it
 	 * @param msg Message with the records to delete
 	 */
 	static void remove_and_delete_all_record(Message &msg);

@@ -4,7 +4,7 @@
  * @author  ST / Central Labs
  * @version V2.0.0
  * @date    28 Apr 2017
- * @brief   Record header class 
+ * @brief   Record header class
  ******************************************************************************
  * @attention
  *

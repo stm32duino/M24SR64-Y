@@ -62,7 +62,7 @@ RecordWifiConf::RecordWifiConf(const std::string &ssid,const std::string &pass,
 /**
  * move the data into the buffer swapping the byte order
  * @param data data to write into the buffer
- * @param outBuffer buffer where write the data 
+ * @param outBuffer buffer where write the data
 */
 template<typename T>
 void writeBEFromLE(const T& data,uint8_t *outBuffer){

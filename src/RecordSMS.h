@@ -123,7 +123,7 @@ public:
 	};
 
 protected:
-	
+
 	/**
      * Generate the URI content that encodes the sms.
      * @see RecordUri#updateContent
@@ -136,7 +136,7 @@ private:
 
 	/**
 	 * This variable is true when we need to update the URI content,
-	 * it is an optimization to avoid to rebuild multiple times the URI content when 
+	 * it is an optimization to avoid to rebuild multiple times the URI content when
 	 * data has not changed
 	 */
 	bool mContentIsChange;

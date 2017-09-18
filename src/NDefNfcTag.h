@@ -109,10 +109,10 @@ private:
 	 * Data used to store the callback status during a read/write operation.
 	 */
 	struct CallbackStatus{
-		
+
 		/** Object that triggers the callback */
 		NDefNfcTag *callOwner;
-		
+
 		/** Message that the callback is writing/reading */
 		Message *msg;
 	};

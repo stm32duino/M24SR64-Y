@@ -340,7 +340,7 @@ public:
 	virtual ~M24SR(void);
 
 	/*** Public Component Related Methods ***/
-	
+
 	/**
 	 * @brief  This function initializes the M24SR device.
 	 * @param ptr Configure parameters, not used.
@@ -372,7 +372,7 @@ public:
 	}
 
 	////////// tag4 command ////////////////////
-	
+
 	/**
 	 * Select the application file.
 	 * @return M24SR_SUCCESS if the application is selected
@@ -419,7 +419,7 @@ public:
 	}
 
 	/////////////////// iso 7816-4 commands //////////////////////////
-	
+
 	virtual StatusTypeDef verify(PasswordType_t pwdId, uint8_t NbPwdByte,
 			const uint8_t *pPwd) {
 		return (StatusTypeDef) M24SR_SendVerify(passwordTypeToConst(pwdId),
@@ -673,7 +673,7 @@ public:
 
 	/**
 	 * Get an implementation of NDefNfcTag to use the library NDefLib.
-	 * @return an object of type NdefNfcTag 
+	 * @return an object of type NdefNfcTag
 	 */
 	NDefLib::NDefNfcTag* get_NDef_tag();
 
@@ -751,7 +751,7 @@ protected:
 	 * @return 0 if no errors
 	 */
 	int M24SR_IO_I2C_Write(uint8_t *pBuffer, uint8_t NumByteToWrite);
-	
+
 	/**
 	 * Read a command response.
 	 * @param pBuffer Buffer to store the response into.
@@ -759,7 +759,7 @@ protected:
 	 * @return 0 if no errors
 	 */
 	int M24SR_IO_I2C_Read(uint8_t *pBuffer, uint8_t NumByteToRead);
-	
+
 	/**
 	 * Send a command to the component.
 	 * @param NbByte Length of the command.
@@ -767,7 +767,7 @@ protected:
 	 * @return M24SR_SUCCESS if no errors
 	 */
 	StatusTypeDef M24SR_IO_SendI2Ccommand(uint8_t NbByte, uint8_t *pBuffer);
-	
+
 	/**
 	 * Read a command response.
 	 * @param NbByte Number of bytes to read.
@@ -1154,7 +1154,7 @@ private:
 					if(status!=M24SR_SUCCESS)
 						return onFinishCommand(nfc,status);
 
-		
+
 
 					if(mEnable){
 						nfc->disable_permanent_state(mType==WRITE? WritePwd : ReadPwd);
@@ -1435,7 +1435,7 @@ private:
 				return I2C_PWD;
 		}//switch
 	}//passwordTypeToConst
-	
+
 	/**
 	 * convert  a uint16 into an enum value
 	 * @param type

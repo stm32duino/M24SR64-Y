@@ -58,7 +58,7 @@ typedef enum {
 /* Classes  ------------------------------------------------------------------*/
 
 /**
- * An abstract class for Nfc components. 
+ * An abstract class for Nfc components.
  */
 class Nfc : public Component {
 public:
@@ -68,7 +68,7 @@ public:
      * @param offset Read offset.
      * @param nb_bytes_to_read Number of bytes to read.
      * @param[out] p_buffer_read Buffer to store the read data into.
-     * @return NFC_SUCCESS if no errors 
+     * @return NFC_SUCCESS if no errors
      */
     virtual int read_binary(uint16_t offset, uint8_t nb_bytes_to_read, uint8_t *p_buffer_read) = 0;
 
@@ -89,4 +89,4 @@ public:
 
 #endif /* __NFC_CLASS_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/ 
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -141,7 +141,7 @@ public:
 	}
 
 protected:
-   
+
     /**
      * Generate the uri content that encodes the mail content.
      * @see RecordUri#updateContent

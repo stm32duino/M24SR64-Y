@@ -132,7 +132,7 @@ public:
 		mContentIsChange=true;
 		return mCardInfo[type];
 	}
-	
+
     /**
      * Get the record type.
      * @return TYPE_MIME_VCARD
@@ -189,7 +189,7 @@ private:
 	 * vcard field.
 	 * @param content String to search into.
 	 * @param offset Search offset.
-	 * @return type index of the found field or a negative number if not a valid vcard 
+	 * @return type index of the found field or a negative number if not a valid vcard
 	 */
 	static int8_t find_VCard_field_type(const std::string &content,
 			uint16_t offset);

@@ -135,7 +135,7 @@ private:
      * Latitude information.
      */
 	float mLatitiude;
-	
+
 	/**
 	 * Longitude information.
 	 */
