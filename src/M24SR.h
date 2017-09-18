@@ -199,6 +199,16 @@ public:
 	void readSMS(char recipient[], char body[]);
 
 	/**
+	 * This function write a Mime in the NFC flag
+	 */
+	bool writeMime(const char *type, const char *data, const uint8_t dataLength);
+
+	/**
+	 * This function read the Mime in the NFC flag and return it
+	 */
+	void readMime(char *read_type, uint8_t *read_data, uint8_t *read_dataLength);
+
+	/**
 	 * Object that contains all the callbacks fired by this class, each command has its own callback.
 	 * The callback default implementation is an empty function.
 	 */

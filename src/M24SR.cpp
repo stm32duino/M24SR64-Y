@@ -48,6 +48,7 @@
 #include "RecordAAR.h"
 #include "RecordMail.h"
 #include "RecordSMS.h"
+#include "RecordMimeType.h"
 
 #ifdef GPIO_PIN_RESET
   #undef GPIO_PIN_RESET
@@ -1841,4 +1842,69 @@ void M24SR::readSMS(char recipient[], char body[])
   }
 }
 
-/******************* (C) COPYRIGHT 2013 STMicroelectronics *****END OF FILE****/
+bool M24SR::writeMime(const char *type, const char *data, const uint8_t dataLength)
+{
+  bool success = true;
+
+  //retrieve the NdefLib interface
+  NDefLib::NDefNfcTag *tag = this->get_NDef_tag();
+
+  //open the i2c session with the nfc chip
+  if(tag->open_session()) {
+    //create the NDef message and record
+    NDefLib::Message msg;
+    NDefLib::RecordMimeType rMime(type, (uint8_t*)data, dataLength);
+    msg.add_record(&rMime);
+    //write the tag
+    if(tag->write(msg)) {
+      success = true;
+    } else {
+      success = false;
+    }
+
+    //close the i2c session
+    tag->close_session();
+  } else {
+    success = false;
+  }
+  return success;
+}
+
+
+void M24SR::readMime(char *read_type, uint8_t *read_data, uint8_t *read_dataLength)
+{
+  //retrieve the NdefLib interface
+  NDefLib::NDefNfcTag *tag = this->get_NDef_tag();
+
+  //open the i2c session with the nfc chip
+  if(tag->open_session()) {
+
+    //create the NDef message and record
+    NDefLib::Message msg;
+
+    //read the tag
+    if(tag->read(&msg)) {
+      const uint32_t nRecords = msg.get_N_records();
+      for(int i =0 ;i<(int)nRecords ;i++) {
+        if(msg[i]->get_type()== NDefLib::Record::TYPE_MIME) {
+          NDefLib::RecordMimeType *rMime = (NDefLib::RecordMimeType *)msg[i];
+          strcpy(read_type, rMime->get_mime_type().c_str());
+          *read_dataLength = rMime->get_mime_data_lenght();
+          for (int i = 0; i<*read_dataLength; i++)
+          {
+            read_data[i] = rMime->get_mime_data()[i];
+          }
+        }
+      }
+
+      //free the read records
+      NDefLib::Message::remove_and_delete_all_record(msg);
+    }
+
+    //close the i2c session
+    tag->close_session();
+  }
+}
+
+
+/******************* (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
