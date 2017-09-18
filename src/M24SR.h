@@ -148,6 +148,16 @@ public:
 	typedef void(*gpoEventCallback)(void);
 
 	/**
+		 * This function write a text in the NFC flag
+		 */
+	  bool writeTxt(const char *text);
+
+		/**
+		 * This function read the text in the NFC flag and return it
+		 */
+	  void readTxt(char text_read[]); 
+
+	/**
 	 * Object that contains all the callbacks fired by this class, each command has its own callback.
 	 * The callback default implementation is an empty function.
 	 */
@@ -346,7 +356,7 @@ public:
 	 * @param ptr Configure parameters, not used.
      * @return M24SR_SUCCESS if no errors
 	 */
-	virtual int init(void *ptr) {
+	virtual int begin(void *ptr) {
 		return (StatusTypeDef) M24SR_Init((M24SR_InitTypeDef*)ptr);
 	}
 

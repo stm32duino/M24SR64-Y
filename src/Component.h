@@ -61,7 +61,7 @@ public:
      * @param[in] init pointer to device specific initalization structure.
      * @retval    "0" in case of success, an error code otherwise.
      */
-    virtual int init(void *init) = 0;
+    virtual int begin(void *init) = 0;
 
     /**
      * @brief      Getting the ID of the component.
