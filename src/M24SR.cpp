@@ -46,6 +46,7 @@
 #include "RecordText.h"
 #include "RecordURI.h"
 #include "RecordAAR.h"
+#include "RecordMail.h"
 
 #ifdef GPIO_PIN_RESET
   #undef GPIO_PIN_RESET
@@ -1703,6 +1704,67 @@ void M24SR::readAAR(char text_read[])
         if(msg[i]->get_type()== NDefLib::Record::TYPE_AAR) {
           NDefLib::RecordAAR *rAAR = (NDefLib::RecordAAR *)msg[i];
           strcpy(text_read, rAAR->get_package().c_str());
+        }
+      }
+
+      //free the read records
+      NDefLib::Message::remove_and_delete_all_record(msg);
+    }
+
+    //close the i2c session
+    tag->close_session();
+  }
+}
+
+bool M24SR::writeURIMail(const char *add, const char *subject, const char *body)
+{
+  bool success = true;
+
+  //retrieve the NdefLib interface
+  NDefLib::NDefNfcTag *tag = this->get_NDef_tag();
+
+  //open the i2c session with the nfc chip
+  if(tag->open_session()) {
+    //create the NDef message and record
+    NDefLib::Message msg;
+    NDefLib::RecordMail rMail(add, subject, body);
+    msg.add_record(&rMail);
+    //write the tag
+    if(tag->write(msg)) {
+      success = true;
+    } else {
+      success = false;
+    }
+
+    //close the i2c session
+    tag->close_session();
+  } else {
+    success = false;
+  }
+  return success;
+}
+
+
+void M24SR::readURIMail(char add[], char subject[], char body[])
+{
+  //retrieve the NdefLib interface
+  NDefLib::NDefNfcTag *tag = this->get_NDef_tag();
+
+  //open the i2c session with the nfc chip
+  if(tag->open_session()) {
+
+    //create the NDef message and record
+    NDefLib::Message msg;
+
+    //read the tag
+    if(tag->read(&msg)) {
+      const uint32_t nRecords = msg.get_N_records();
+      for(int i =0 ;i<(int)nRecords ;i++) {
+        if(msg[i]->get_type()== NDefLib::Record::TYPE_URI_MAIL) {
+          NDefLib::RecordMail *rMail = (NDefLib::RecordMail *)msg[i];
+          strcpy(add, rMail->get_to_address().c_str());
+          strcpy(subject, rMail->get_subject().c_str());
+          strcpy(body, rMail->get_body().c_str());
         }
       }
 
