@@ -189,6 +189,16 @@ public:
 	void readURIMail(char add[], char subject[], char body[]);
 
 	/**
+	 * This function write a SMS in the NFC flag
+	 */
+	bool writeSMS(const char *recipient, const char *body);
+
+	/**
+	 * This function read the SMS in the NFC flag and return it
+	 */
+	void readSMS(char recipient[], char body[]);
+
+	/**
 	 * Object that contains all the callbacks fired by this class, each command has its own callback.
 	 * The callback default implementation is an empty function.
 	 */

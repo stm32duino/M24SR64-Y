@@ -47,6 +47,7 @@
 #include "RecordURI.h"
 #include "RecordAAR.h"
 #include "RecordMail.h"
+#include "RecordSMS.h"
 
 #ifdef GPIO_PIN_RESET
   #undef GPIO_PIN_RESET
@@ -1657,6 +1658,7 @@ void M24SR::readUri(char text_read[])
   }
 }
 
+
 bool M24SR::writeAAR(const char *text)
 {
   bool success = true;
@@ -1716,6 +1718,7 @@ void M24SR::readAAR(char text_read[])
   }
 }
 
+
 bool M24SR::writeURIMail(const char *add, const char *subject, const char *body)
 {
   bool success = true;
@@ -1765,6 +1768,67 @@ void M24SR::readURIMail(char add[], char subject[], char body[])
           strcpy(add, rMail->get_to_address().c_str());
           strcpy(subject, rMail->get_subject().c_str());
           strcpy(body, rMail->get_body().c_str());
+        }
+      }
+
+      //free the read records
+      NDefLib::Message::remove_and_delete_all_record(msg);
+    }
+
+    //close the i2c session
+    tag->close_session();
+  }
+}
+
+
+bool M24SR::writeSMS(const char *recipient, const char *body)
+{
+  bool success = true;
+
+  //retrieve the NdefLib interface
+  NDefLib::NDefNfcTag *tag = this->get_NDef_tag();
+
+  //open the i2c session with the nfc chip
+  if(tag->open_session()) {
+    //create the NDef message and record
+    NDefLib::Message msg;
+    NDefLib::RecordSMS rSMS(recipient, body);
+    msg.add_record(&rSMS);
+    //write the tag
+    if(tag->write(msg)) {
+      success = true;
+    } else {
+      success = false;
+    }
+
+    //close the i2c session
+    tag->close_session();
+  } else {
+    success = false;
+  }
+  return success;
+}
+
+
+void M24SR::readSMS(char recipient[], char body[])
+{
+  //retrieve the NdefLib interface
+  NDefLib::NDefNfcTag *tag = this->get_NDef_tag();
+
+  //open the i2c session with the nfc chip
+  if(tag->open_session()) {
+
+    //create the NDef message and record
+    NDefLib::Message msg;
+
+    //read the tag
+    if(tag->read(&msg)) {
+      const uint32_t nRecords = msg.get_N_records();
+      for(int i =0 ;i<(int)nRecords ;i++) {
+        if(msg[i]->get_type()== NDefLib::Record::TYPE_URI_SMS) {
+          NDefLib::RecordSMS *rSMS = (NDefLib::RecordSMS *)msg[i];
+          strcpy(recipient, rSMS->get_number().c_str());
+          strcpy(body, rSMS->get_messagge().c_str());
         }
       }
 
