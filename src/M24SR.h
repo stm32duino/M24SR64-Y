@@ -147,15 +147,26 @@ public:
 	 */
 	typedef void(*gpoEventCallback)(void);
 
-	/**
-		 * This function write a text in the NFC flag
-		 */
-	  bool writeTxt(const char *text);
 
-		/**
-		 * This function read the text in the NFC flag and return it
-		 */
-	  void readTxt(char text_read[]); 
+	/**
+	 * This function write a text in the NFC flag
+	 */
+  bool writeTxt(const char *text);
+
+	/**
+	 * This function read the text in the NFC flag and return it
+	 */
+  void readTxt(char text_read[]);
+
+	/**
+	 * This function write a URI in the NFC flag
+	 */
+  bool writeUri(const char *text);
+
+	/**
+	 * This function read the URI in the NFC flag and return it
+	 */
+  void readUri(char text_read[]);
 
 	/**
 	 * Object that contains all the callbacks fired by this class, each command has its own callback.
