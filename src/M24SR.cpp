@@ -1439,26 +1439,26 @@ M24SR::StatusTypeDef M24SR::M24SR_RFConfig(uint8_t OnOffChoice) {
 }
 
 int M24SR::M24SR_IO_I2C_Write(uint8_t *pBuffer, uint8_t NumByteToWrite) {
-      dev_I2C->beginTransmission(((uint8_t)(((address) >> 1) & 0x7F)));
+  dev_I2C->beginTransmission(((uint8_t)(((address) >> 1) & 0x7F)));
 
-      for (int i = 0 ; i < NumByteToWrite ; i++)
-        dev_I2C->write(pBuffer[i]);
+  for (int i = 0 ; i < NumByteToWrite ; i++)
+    dev_I2C->write(pBuffer[i]);
 
-      return dev_I2C->endTransmission(true);
+  return dev_I2C->endTransmission(true);
 }
 
 int M24SR::M24SR_IO_I2C_Read(uint8_t *pBuffer, uint8_t NumByteToRead) {
   if(dev_I2C->requestFrom(((uint8_t)(((address) >> 1) & 0x7F)), (byte) NumByteToRead) == 0)
     return 1;
 
-    int i=0;
-    while (dev_I2C->available())
-    {
-      pBuffer[i] = dev_I2C->read();
-      i++;
-    }
+  int i=0;
+  while (dev_I2C->available())
+  {
+    pBuffer[i] = dev_I2C->read();
+    i++;
+  }
 
-    return 0;
+  return 0;
 }
 
 M24SR::StatusTypeDef M24SR::M24SR_IO_SendI2Ccommand(uint8_t NbByte,
@@ -1468,7 +1468,6 @@ M24SR::StatusTypeDef M24SR::M24SR_IO_SendI2Ccommand(uint8_t NbByte,
   int status =1;
   while (status != 0 && (nTry++)<M24SR_MAX_I2C_ACCESS_TRY) {
     status = M24SR_IO_I2C_Write(pBuffer, NbByte);
-
   }
   if (status == 0)
     return M24SR_SUCCESS;
@@ -1485,6 +1484,9 @@ M24SR::StatusTypeDef M24SR::M24SR_IO_ReceiveI2Cresponse(uint8_t NbByte,
 
   while (status != 0 && (nTry++)<M24SR_MAX_I2C_ACCESS_TRY) {
     status = M24SR_IO_I2C_Read(pBuffer, NbByte);
+    if(status != 0) {
+      delay(1); //delay required to avoid an error
+    }
   }
   if (status == 0)
     return M24SR_SUCCESS;
