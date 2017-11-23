@@ -24,7 +24,7 @@ On Android, donwload a NFC Tools. Then start the app, check if NFC is activated
 on your smartphone. Put your smartphone near the tag, you can read it. You can
 write a tag with this app.
 
-## API
+## API
 
 Before the setup :
 Choose the pinout of the I2C to use for communicate with the NFC device. Choose the pinout of the M24SR64-Y.
