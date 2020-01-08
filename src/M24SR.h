@@ -159,9 +159,14 @@ public:
 	void readTxt(char text_read[]);
 
 	/**
-	 * This function write a URI in the NFC flag
+	 * This function write a URI in the NFC flag (scheme: "http://www.")
 	 */
-	bool writeUri(const char *text);
+	bool writeUri(const char *uri);
+
+	/**
+	 * This function writes a URI in the NFC flag with a custom scheme
+	 */
+	bool writeUri(const char *scheme, const char *uri);
 
 	/**
 	 * This function read the URI in the NFC flag and return it

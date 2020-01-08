@@ -1603,6 +1603,11 @@ void M24SR::readTxt(char text_read[])
 
 bool M24SR::writeUri(const char *uri)
 {
+  return M24SR::writeUri("http://www.", uri);
+}
+
+bool M24SR::writeUri(const char *scheme, const char *uri)
+{
   bool success = false;
 
   //retrieve the NdefLib interface
@@ -1612,7 +1617,7 @@ bool M24SR::writeUri(const char *uri)
   if(tag->open_session()) {
     //create the NDef message and record
     NDefLib::Message msg;
-    NDefLib::RecordURI rUri(NDefLib::RecordURI::HTTP_WWW, uri);
+    NDefLib::RecordURI rUri(scheme, uri);
     msg.add_record(&rUri);
     //write the tag
     if(tag->write(msg)) {
