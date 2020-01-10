@@ -1601,7 +1601,7 @@ void M24SR::readTxt(char text_read[])
   }
 }
 
-bool M24SR::writeUri(const char *uri)
+bool M24SR::writeUri(const char *text)
 {
   bool success = false;
 
@@ -1612,7 +1612,35 @@ bool M24SR::writeUri(const char *uri)
   if(tag->open_session()) {
     //create the NDef message and record
     NDefLib::Message msg;
-    NDefLib::RecordURI rUri(NDefLib::RecordURI::HTTP_WWW, uri);
+    NDefLib::RecordURI rUri(NDefLib::RecordURI::HTTP_WWW, text);
+    msg.add_record(&rUri);
+    //write the tag
+    if(tag->write(msg)) {
+      success = true;
+    } else {
+      success = false;
+    }
+
+    //close the i2c session
+    tag->close_session();
+  } else {
+    success = false;
+  }
+  return success;
+}
+
+bool M24SR::writeUri(const char *scheme, const char *uri)
+{
+  bool success = false;
+
+  //retrieve the NdefLib interface
+  NDefLib::NDefNfcTag *tag = this->get_NDef_tag();
+
+  //open the i2c session with the nfc chip
+  if(tag->open_session()) {
+    //create the NDef message and record
+    NDefLib::Message msg;
+    NDefLib::RecordURI rUri(scheme, uri);
     msg.add_record(&rUri);
     //write the tag
     if(tag->write(msg)) {
